@@ -1,62 +1,71 @@
-# SME_funding_guarantee_shantou
+# SME Funding Guarantee Shantou
 
-## BackGroud
+​							[中文文档](./README-zh.md)
 
-​	中小微企业作为国家经济的重要组成部分，不仅在促进经济增长、推动技术创新、增加就业机会等方面发挥着不可替代的作用，还是市场经济活力的源泉。然而，近年来，中小微企业也面临融资难、市场竞争力弱、管理水平低等问题引起的生存与发展困境。由于中小微企业规模相对较小、信用记录不健全、抵押物不足等因素，导致其难以从传统金融机构获得足够的资金支持，进而影响了其经营发展和市场竞争力，成为制约其生成发展的关键瓶颈（图1-1）。
+## Background
 
-![图1](./images/图1.jpg)					
+Small and medium-sized enterprises (SMEs) are a vital component of the national economy, playing an irreplaceable role in promoting economic growth, driving technological innovation, and increasing employment opportunities, while also serving as a source of vitality for the market economy. However, in recent years, SMEs have faced survival and development challenges due to issues such as difficulties in obtaining financing, weak market competitiveness, and low management capabilities. Due to their relatively small scale, incomplete credit records, and insufficient collateral, SMEs often struggle to secure adequate financial support from traditional institutions, which in turn affects their operational development and market competitiveness, becoming a key bottleneck restricting their growth (see Figure 1-1).
 
-                    图1-1 中小微企业注册注销比
+![Figure 1](./images/图1.jpg)  
+*Figure 1-1: Ratio of SME Registrations to Cancellations*
 
-​	针对中小微企业的融资难题，融资担保作为一种有效的风险分担机制，成为解决中小微企业融资难的主要工具。通过引入第三方担保机构，为中小微企业提供信用增强，降低了金融机构的贷款风险，从而提高了中小微企业的融资成功率。然而，当前融资担保业务在实践中也面临着一系列问题，如过度依赖专家经验、评审流程长、评审主观性强、担保数据经验共享难等，这些问题严重制约了融资担保业务的有效开展和中小微企业的融资便利性（图1-2）。
+To address the financing difficulties faced by SMEs, financing guarantees, as an effective risk-sharing mechanism, have become a primary tool to resolve these challenges. By introducing third-party guarantee institutions, credit enhancement is provided to SMEs, reducing the lending risks for financial institutions and thereby increasing the success rate of SME financing. However, in practice, the current financing guarantee business faces a series of issues, such as over-reliance on expert experience, lengthy review processes, strong subjectivity in evaluations, and difficulties in sharing guarantee data and experience. These problems severely limit the effective implementation of financing guarantee services and the financing accessibility for SMEs (see Figure 1-2).
 
-![图2](./images/图2.jpg)
+![Figure 2](./images/图2.jpg)  
+*Figure 1-2: SME Guarantee Process*
 
-                        图1-2 中小微企业担保流程
-​	为了克服传统融资担保业务中的不足，提高中小微企业融资担保的效率和准确性，探索使用数据驱动的方式进行中小微企业融资担保评估显得尤为重要。数据驱动的方法能够充分利用历史数据，借助机器学习等技术对中小微企业的信用状况、经营能力、发展前景等进行全面、客观、精准的评估，从而为融资担保决策提供科学依据。
+To overcome the shortcomings of traditional financing guarantee operations and improve the efficiency and accuracy of SME financing guarantees, exploring data-driven approaches for SME financing guarantee assessments has become particularly important. Data-driven methods can fully leverage historical data, using technologies such as machine learning to conduct comprehensive, objective, and precise evaluations of SMEs’ credit status, operational capabilities, and development prospects, thereby providing a scientific basis for financing guarantee decisions.
 
+## Project 1 - LLM-Assisted Prediction
+The specific framework of this project is shown in Figure 2, divided into two versions: API-based LLM invocation and locally deployed LLM.
 
-## 项目1-基于LLM辅助预测
-该项目具体框架如图2所示，共分为两个版本：API调用LLM与本地部署LLM
-![img.png](./images/project1、2.png)
+**In the folders of both versions:**
+- *RAG folder*: External knowledge base data - experiential data
+- *scaler-model folder*: Normalization models and pre-trained prediction models
+- *test_data folder*: Dataset to be tested
 
-                            图2 项目1、2的算法框架图
-## 项目1-1-Agent辅助预测-API
-使用该项目代码可调用LLM官方API进行汕头市中小微企业融资担保评估（包含结构化数据模型、文本数据、历史经验）
-self.row 表示的是选择待测数据集中第x行的数据
-将API存储到env文件中,使用os调用API和URL地址。以下以deepseek为例：
-``` python
+![img.png](./images/project1、2.png)  
+*Figure 2: Algorithm Framework for Projects 1 and 2*
+
+### Project 1-1 - Agent-Assisted Prediction - API
+Using this project’s code, the official LLM API can be invoked to conduct financing guarantee assessments for SMEs in Shantou City (including structured data models, text data, and historical experience).  
+`self.row` refers to selecting data from the x-th row of the test dataset.  
+The API is stored in an `.env` file and called using `os`. Below is an example using DeepSeek:
+
+```python
 load_dotenv()
-os.environ['OPENAI_API_KEY'] = os.getenv('DeepSeek_trans_API')  # 设定API密钥
-os.environ["OPENAI_API_BASE"] = 'https://tbnx.plus7.plus/v1'  # 设定URL地址
+os.environ['OPENAI_API_KEY'] = os.getenv('DeepSeek_trans_API')  # Set API key
+os.environ["OPENAI_API_BASE"] = 'https://tbnx.plus7.plus/v1'  # Set URL address
 ```
 
-## 项目1-2-Agent辅助预测-本地部署
-使用该项目代码可使用本地部署LLM进行汕头市中小微企业融资担保评估，保障数据隐私安全，完全本地化
-self.row 表示的是选择待测数据集中第x行的数据。
-### 首先本地部署LLM：
-#### 1.官网下载安装 OLLAMA:
+### Project 1-2 - Agent-Assisted Prediction - Local Deployment
+Using this project’s code, a locally deployed LLM can be used to conduct financing guarantee assessments for SMEs in Shantou City, ensuring data privacy and security with full localization.  
+`self.row` refers to selecting data from the x-th row of the test dataset.
+
+#### Steps to Deploy LLM Locally:
+##### 1. Download and Install OLLAMA from the Official Website:
 `https://ollama.com/download`
 
 ![img.png](./images/img.png)
-#### 2. OLLAMA官网下载LLM模型（以DeepSeek-r1 14b模型为例）
 
-官网下载对应版本：
+##### 2. Download the LLM Model from the OLLAMA Website (e.g., DeepSeek-r1 14b Model)
+Download the corresponding version from the official website:  
 ![img.png](./images/model.png)
 
-终端运行 `ollama run deepseek-r1:14b`
+Run in the terminal:  
+`ollama run deepseek-r1:14b`
 
-#### 3. 代码中读取模型
+##### 3. Load the Model in the Code
+```python
+self.model = Ollama(model="deepseek-r1:14b")
+```
 
-    `self.model = Ollama(model="deepseek-r1:14b") `
-
-## 项目3-LEAF算法-特征增强预测
-使用该代码可进行特征扩充，并进行汕头市中小微企业融资担保评估。代码框架如下：
+## Project 3 - LEAF Algorithm - Feature-Enhanced Prediction
+Using this code, feature expansion can be performed, followed by financing guarantee assessments for SMEs in Shantou City. The code framework is as follows:
 
 ![img.png](./images/project3.png)
 
 
 
-
-
-
+[./README.md]: 
+[./README-zh.md]: 

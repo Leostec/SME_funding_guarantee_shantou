@@ -221,9 +221,9 @@ class Robot:
         dataset = dataset.fillna(0)
 
         try:
-            scaler_X = joblib.load('/Users/leo/研究生/资产评估/汕头合作/线下交流/scaler_X.pkl')
-            scaler_y = joblib.load('/Users/leo/研究生/资产评估/汕头合作/线下交流/scaler_y.pkl')
-            xgb_model = joblib.load('/Users/leo/研究生/资产评估/汕头合作/线下交流/best_model.pkl')
+            scaler_X = joblib.load('./scaler-model/scaler_X.pkl')
+            scaler_y = joblib.load('./scaler-model/scaler_y.pkl')
+            xgb_model = joblib.load('./scaler-model/best_model.pkl')
         except FileNotFoundError as e:
             return f"模型文件未找到: {e}"
         except Exception as e:
@@ -363,6 +363,6 @@ class Robot:
 if __name__ == '__main__':
     robot = Robot()
     robot.batch_predict(
-        dataset_xlsx="/Users/leo/研究生/资产评估/汕头合作/线下交流/黑箱测试集.xlsx",
-        history_file="/Users/leo/研究生/资产评估/汕头合作/线下交流/贷款评审要素_总结版.docx",
+        dataset_xlsx="./test_data/黑箱测试集.xlsx",
+        history_file="./RAG/贷款评审要素_总结版.docx",
     )

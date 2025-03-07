@@ -22,7 +22,7 @@ def datasets_to_X_y(ds_path):
             X_oh - 经过独热编码后的数据集特征
     """
     ds_name = '报告数据'  #提取数据集名称
-    df = pd.read_excel('/Users/leo/研究生/资产评估/汕头合作/线下交流/test_data.xlsx')
+    df = pd.read_excel('./test_data.xlsx')
     eval_asset_values = df['过会金额（万元）'].apply(lambda x: 0 if 0 <= x <= 50 else
     1)
     # 替换原始数据中的评估资产列
